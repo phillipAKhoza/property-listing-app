@@ -47,6 +47,7 @@ function Profile() {
             <div className="profileCard">
                 <form>
                     <input type="text" id='name' className={!changeDetails ? 'profileName' : 'profileNameActive'} disabled={!changeDetails} value={name} onChange={onChange}/>
+                    <input type="email" id='email' className={!changeDetails ? 'profileEmail' : 'profileEmailActive'} disabled={!changeDetails} value={email} onChange={onChange}/>
                 </form>
             </div>
         </main>
