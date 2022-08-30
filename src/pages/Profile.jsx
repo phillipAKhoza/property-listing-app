@@ -1,8 +1,9 @@
 import {useState } from 'react';
 import {getAuth, updateProfile} from 'firebase/auth';
-import {updateDoc} from 'firebase/firestore';
+import {doc, updateDoc} from 'firebase/firestore';
 import {db} from '../firebase.config';
 import {Link, useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 function Profile() {
     const auth = getAuth();
@@ -18,8 +19,21 @@ function Profile() {
         navigate('/');
     }
 
-    const onsubmit = ()=>{
-        console.log('clicked');
+    const onsubmit = async()=>{
+        try {
+            if(auth.currentUser.displayName !== name){
+                await updateProfile(auth.currentUser,{
+                    displayName: name
+                });
+
+                const userRef = doc(db,'users', auth.currentUser.uid);
+                await updateDoc(userRef,{
+                    name
+                });
+            }
+        } catch (error) {
+            toast.error('user personal details update failed');
+        }
     }
 
     const onChange= (e)=>{
