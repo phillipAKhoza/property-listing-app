@@ -32,6 +32,31 @@ function CreateListing() {
         e.preventDefault()
     }
     const onMutate = (e) =>{
+    // buttons
+        let boolean = null;
+
+        if(e.target.value === 'true'){
+            boolean = true
+        }
+
+        if(e.target.value === 'false'){
+            boolean = false
+        }
+    // files
+    if(e.target.files){
+        setFormData((prevState)=>({
+            ...prevState,
+            images: e.target.files
+        }))
+    }
+
+    // Text/Boolean/Numbers
+    if(!e.target.files){
+        setFormData((prevState)=>({
+            ...prevState,
+            [e.target.id]: boolean ?? e.target.value 
+        }))
+    }
     }
     
     useEffect(()=>{
@@ -192,10 +217,30 @@ function CreateListing() {
                     onChange={onMutate}
                     required
                     />
-                    {formData.type === 'rent' &&(
+                    {type === 'rent' &&(
                         <p className="formPriceText">R / Month</p>
                     )}
                 </div>
+                {offer &&(
+                    
+                    <>
+                     <label className="formLabel">Discounted price</label>
+                         <input 
+                         type="number" 
+                         className="formInputSmall" 
+                         id="discountedPrice"
+                         value={discountedPrice}
+                         min='50'
+                         max='75000000'
+                         onChange={onMutate}
+                         required={offer}
+                         />
+                    </>
+                )}
+                <label className="formLabel">Images</label>
+                <p className="imageInfo">The first image will be the cover (max 6).</p>
+                <input className="formInputFile" type="file" id="images" onChange={onMutate} max='6' accept=".jpg,.png,.jpeg" multiple required/>
+                <button type="submit" className="primaryButton CreateListingButton">Create Listing</button>
                 </form>
             </main>
         </div>
