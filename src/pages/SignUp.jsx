@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {toast} from 'react-toastify';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {db} from '../firebase.config';
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
@@ -48,7 +49,7 @@ function SignUp() {
 
             navigate('/')
         } catch (error) {
-            console.log(error);
+            toast.error('Something went wrong please try again');
         }
     }
 
