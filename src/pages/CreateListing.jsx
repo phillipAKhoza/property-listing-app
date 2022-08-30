@@ -181,20 +181,21 @@ function CreateListing() {
                     </button>
                 </div>
                 <label className="formLabel">Regular price</label>
-                <input 
-                type="number" 
-                className="formInputSmall" 
-                id="regularPrice"
-                value={regularPrice}
-                min='50'
-                max='75000000'
-                onChange={onMutate}
-                required
-                />
-                {formData.type === 'rent' &&(
-                    <p className="formPriceText">R / Month</p>
-                )}
-                
+                <div className="formPriceDiv">
+                    <input 
+                    type="number" 
+                    className="formInputSmall" 
+                    id="regularPrice"
+                    value={regularPrice}
+                    min='50'
+                    max='75000000'
+                    onChange={onMutate}
+                    required
+                    />
+                    {formData.type === 'rent' &&(
+                        <p className="formPriceText">R / Month</p>
+                    )}
+                </div>
                 </form>
             </main>
         </div>
