@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import {toast} from 'react-toastify';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import {db} from '../firebase.config';
 import {v4 as uuidv4} from 'uuid';
 
@@ -115,13 +116,21 @@ function CreateListing() {
 
         const imageUrls = await Promise.all(
             [...images].map((image)=> storeImage(image))
-        ).catch((error)=>{
+        ).catch(()=>{
             setLoading(false);
             toast.error('Images not Uploaded');
-            console.log(error);
+            // console.log(error);
         });
 
-        console.log(imageUrls);
+        const formDataCopy = {
+            ...formData,
+            imageUrls,
+            geolocation,
+            timestamp: serverTimestamp()
+        }
+         delete formDataCopy.images;
+         delete formDataCopy.address;
+
         setLoading(false)
     }
     const onMutate = (e) =>{
