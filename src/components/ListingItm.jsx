@@ -33,7 +33,7 @@ function ListingItem({listing, id, onDelete}) {
                 </div>
             </div>
         </Link>
-        {onDelete && (<DeleteIcon className='removeIcon' fill='rgd(231, 76, 60 )' onClick={()=> onDelete(listing.id, listing.name)}/>)}
+        {onDelete && (<DeleteIcon className='removeIcon' fill='#D9001D' onClick={()=> onDelete(listing.id, listing.name)}/>)}
     </li>
      );
 }
