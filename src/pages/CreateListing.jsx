@@ -72,7 +72,7 @@ function CreateListing() {
         }else{
             geolocation.lat = latitude;
             geolocation.lng = longitude;
-            location = address;
+            // location = address;
         }
 
         const storeImage = async (image) =>{
@@ -128,10 +128,18 @@ function CreateListing() {
             geolocation,
             timestamp: serverTimestamp()
         }
+        formDataCopy.location =address;
          delete formDataCopy.images;
          delete formDataCopy.address;
+        //  location && (formDataCopy.location = location)
+         !formDataCopy.offer && delete formDataCopy.discountedPrice
 
-        setLoading(false)
+         console.log(formDataCopy);
+         const docRef = await addDoc(collection(db, 'listings' ), formDataCopy).catch((error)=>{console.log(error);});
+
+        setLoading(false);
+        toast.success('List saved');
+        navigate(`/category/${formDataCopy.type}/${docRef.id}`)
     }
     const onMutate = (e) =>{
     // buttons
