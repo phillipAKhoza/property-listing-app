@@ -24,7 +24,9 @@ button {
   outline: none;
   border: none;
 }
-
+.anchorButton{
+  padding-top: 10px ;
+}
 .input,
 .passwordInput,
 .emailInput,
