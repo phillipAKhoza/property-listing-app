@@ -9,7 +9,7 @@ import {db} from '../firebase.config';
 import {v4 as uuidv4} from 'uuid';
 
 function EditListing() {
-
+    // eslint-disable-next-line
     const [geoLocationEnabled,setGeoLocationEnabled ] =useState(false);
 
     const [formData, setFormData] = useState({
