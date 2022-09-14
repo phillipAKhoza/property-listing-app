@@ -29,11 +29,12 @@ function SignIn() {
         try {
             
             const auth = getAuth();
-            
+           
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             
             if(userCredential.user){
                 navigate('/')
+
             }
         } catch (error) {
             toast.error('Incorrect Email/Password');
